@@ -1,0 +1,21 @@
+{
+  "name": "eka-challenge-2",
+  "version": "1.0.0",
+  "description": "a form for user submitted information",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JEffrey Briner",
+  "license": "ISC",
+  "dependencies": {
+    "bookshelf": "^0.10.4",
+    "express": "^4.15.4",
+    "knex": "^0.13.0",
+    "postgresql": "0.0.1",
+    "react": "^15.6.1",
+    "react-router": "^4.2.0",
+    "redux": "^3.7.2",
+    "webpack": "^3.5.6"
+  }
+}
