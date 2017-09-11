@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
+import Form1 from './components/form1'
+import store from './reducers';
 
 class App extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 
 	render() {
+		console.log(this.props.children);
 		return (
-			<div>This is a test to make sure webpack is working</div>
+			<Provider store={store}>
+				<Form1 ></Form1>
+			</Provider>
 		)
 	}
 }
