@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import { updateFirstName, updateLastName } from '../actions/nameChange';
 import { updatePhone } from '../actions/phoneChange';
 
@@ -38,7 +40,7 @@ class Form2 extends React.Component {
 						<input type='text' name='email' defaultValue={this.props.telephoneNumber.telephoneNumber} onChange={this.updatePhoneState} />
 					</label>
 				</form>
-				<button>Save</button>
+				<button><Link to='/signUp3'>Save</Link></button>
 			</div>
 		)
 	}

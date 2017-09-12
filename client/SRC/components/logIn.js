@@ -1,18 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-
 import { updateUsername } from '../actions/usernameChange';
 import { updatePassword } from '../actions/passwordChange';
-import { updateEmail } from '../actions/emailChange';
 
-class Form1 extends React.Component {
+class LogIn extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.updateUsernameState = this.updateUsernameState.bind(this);
 		this.updatePasswordState = this.updatePasswordState.bind(this);
-		this.updateEmailState = this.updateEmailState.bind(this);
 	}
 
 	updateUsernameState (e) {
@@ -21,10 +17,6 @@ class Form1 extends React.Component {
 
 	updatePasswordState (e) {
 		this.props.dispatch(updatePassword(e.target.value))
-	}
-
-	updateEmailState (e) {
-		this.props.dispatch(updateEmail(e.target.value))
 	}
 
 	render() {
@@ -37,16 +29,14 @@ class Form1 extends React.Component {
 					<label>Password:
 						<input type='text' name='password' defaultValue={this.props.password.password} onChange={this.updatePasswordState} />
 					</label>
-					<label> email:
-						<input type='text' name='email' defaultValue={this.props.email.email} onChange={this.updateEmailState} />
-					</label>
 				</form>
-				<button><Link to='/signUp2'>Save</Link></button>
+				<button>Log In</button>
 			</div>
 		)
 	}
 }
 
 export default connect((state) => {
-	return {username: state.username, password: state.password, email: state.email};
-})(Form1)
+	return {username: state.username, password: state.password};
+})(LogIn)
+

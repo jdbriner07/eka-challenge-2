@@ -1,5 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+
 import { updateStreetNumber, updateCity, updateState, updateZip } from '../actions/addressChange';
 
 class Form3 extends React.Component {
@@ -45,7 +48,7 @@ class Form3 extends React.Component {
 						<input type='text' name='email' defaultValue={this.props.address.zip} onChange={this.updateZipState} />
 					</label>
 				</form>
-				<button>Save</button>
+				<button><Link to='/profile'>Save</Link></button>
 			</div>
 		)
 	}
