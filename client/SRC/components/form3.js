@@ -60,6 +60,7 @@ class Form3 extends React.Component {
 			!this.state.completed ?
 			<div>
 				<form>
+					<h1>Please give us more information</h1>
 					<h1 className='error'>{this.state.error}</h1>
 					<label> Street address: 
 						<input type='text' name='streetNumber' defaultValue={this.props.address.streetNumber} onChange={this.updateStreetNumberState} />

@@ -41,6 +41,7 @@ class LogIn extends React.Component {
 		return (
 			!this.state.completed ?
 			<div>
+				<h1>Please LogIn</h1>
 				<h1 className='error'>{this.state.error}</h1>
 				<form>
 					<label> Username: 

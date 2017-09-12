@@ -54,6 +54,7 @@ class Form2 extends React.Component {
 		return (
 			!this.state.completed ? <div>
 				<form>
+					<h1>Please give us more information</h1>
 					<h1 className='error'>{this.state.error}</h1>
 					<label> First Name: 
 						<input type='text' name='firstName' defaultValue={this.props.name.firstName} onChange={this.updateFirstNameState} />
