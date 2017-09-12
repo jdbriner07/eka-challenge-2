@@ -1,4 +1,4 @@
-const name = function(state={}, action) {
+const name = function(state={firstName: '', lastName:''}, action) {
 	if (action.type === 'setFirstName') {
 		return Object.assign({}, state, {firstName: action.payload});
 	} else if (action.type === 'setLastName') {

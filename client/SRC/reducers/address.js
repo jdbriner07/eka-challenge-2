@@ -1,4 +1,4 @@
-const address = function(state={}, action) {
+const address = function(state={city:'', state:'', streetNumber:'', zip:''}, action) {
 	if (action.type === 'setStreetNumber') {
 		return Object.assign({}, state, {streetNumber: action.payload});
 	} else if (action.type === 'setCity') {

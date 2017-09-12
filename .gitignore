@@ -59,3 +59,6 @@ typings/
 
 # compiled code
 client/dist/bundle.js
+
+# database credentials
+server/Database/config

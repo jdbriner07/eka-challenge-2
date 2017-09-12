@@ -1,4 +1,4 @@
-const password = function(state={}, action) {
+const password = function(state={password:''}, action) {
 	if (action.type === 'setPassword') {
 		console.log('password is set');
 		return Object.assign({}, state, {password: action.payload});

@@ -1,4 +1,4 @@
-const telephoneNumber = function(state={}, action) {
+const telephoneNumber = function(state={telephoneNumber: ''}, action) {
 	if (action.type === 'setTelephoneNumber') {
 		return Object.assign({}, state, {telephoneNumber: action.payload});
 	}
