@@ -56,13 +56,13 @@ class Form2 extends React.Component {
 				<form>
 					<h1 className='error'>{this.state.error}</h1>
 					<label> First Name: 
-						<input type='text' name='username' defaultValue={this.props.name.firstName} onChange={this.updateFirstNameState} />
+						<input type='text' name='firstName' defaultValue={this.props.name.firstName} onChange={this.updateFirstNameState} />
 					</label>
 					<label> Last Name:
-						<input type='text' name='password' defaultValue={this.props.name.lastName} onChange={this.updateLastNameState} />
+						<input type='text' name='lastName' defaultValue={this.props.name.lastName} onChange={this.updateLastNameState} />
 					</label>
 					<label> Telephone Number:
-						<input type='text' name='email' defaultValue={this.props.telephoneNumber.telephoneNumber} onChange={this.updatePhoneState} />
+						<input type='text' name='phoneNumber' defaultValue={this.props.telephoneNumber.telephoneNumber} onChange={this.updatePhoneState} />
 					</label>
 				</form>
 				<button onClick={this.signUp2}>Save</button>

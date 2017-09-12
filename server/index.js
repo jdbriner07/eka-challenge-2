@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const db = require('./Database/db.js');
 const queries = require('./Database/queries.js');
+const hash = require('./hash.js');
 
 db.connect();
 const app = express();
@@ -16,7 +17,8 @@ app.get('/', function(req, res) {
 })
 
 app.get('/login/*/*', function(req, res) {
-	db.query(queries.loginOrGetUserInfo(req.params[0], req.params[1]), (err, response) => {
+	let password = hash(req.params[1]);
+	db.query(queries.loginOrGetUserInfo(req.params[0], password), (err, response) => {
 		if (err) {
 			console.log(err);
 			res.send(202).send(err);
@@ -27,8 +29,10 @@ app.get('/login/*/*', function(req, res) {
 })
 
 app.post('/signup', function(req, res) {
-	db.query(queries.signup(req.body.username, req.body.password, req.body.email), (err, response) => {
+	let password = hash(req.body.password);
+	db.query(queries.signup(req.body.username, password, req.body.email), (err, response) => {
 		if (err) {
+			console.log(err)
 			res.status(202).send(err);
 		} else {
 			res.sendStatus(201);
@@ -37,7 +41,8 @@ app.post('/signup', function(req, res) {
 })
 
 app.post('/updateInfo2', function(req, res) {
-	db.query(queries.updateInfo2(req.body.username, req.body.password, req.body.name, req.body.phoneNumber), (err, response) => {
+	let password = hash(req.body.password);
+	db.query(queries.updateInfo2(req.body.username, password, req.body.name, req.body.phoneNumber), (err, response) => {
 		if (err) {
 			console.log(err);
 			res.status(202).send(err);
@@ -48,7 +53,8 @@ app.post('/updateInfo2', function(req, res) {
 })
 
 app.post('/updateInfo3', function(req, res) {
-	db.query(queries.updateInfo3(req.body.username, req.body.password, req.body.address), (err, response) => {
+	let password = hash(req.body.password);
+	db.query(queries.updateInfo3(req.body.username, password, req.body.address), (err, response) => {
 		if (err) {
 			console.log(err);
 			res.status(202).send(err);
@@ -59,7 +65,8 @@ app.post('/updateInfo3', function(req, res) {
 })
 
 app.post('/login', function(req, res) {
-	db.query(queries.loginOrGetUserInfo(req.body.username, req.body.password), (err, response) => {
+	let password = hash(req.body.password);
+	db.query(queries.loginOrGetUserInfo(req.body.username, password), (err, response) => {
 		if (err) {
 			console.log(500).send(err);
 		} else {

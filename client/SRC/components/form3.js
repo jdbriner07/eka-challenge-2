@@ -62,16 +62,16 @@ class Form3 extends React.Component {
 				<form>
 					<h1 className='error'>{this.state.error}</h1>
 					<label> Street address: 
-						<input type='text' name='username' defaultValue={this.props.address.streetNumber} onChange={this.updateStreetNumberState} />
+						<input type='text' name='streetNumber' defaultValue={this.props.address.streetNumber} onChange={this.updateStreetNumberState} />
 					</label>
 					<label> City:
-						<input type='text' name='password' defaultValue={this.props.address.city} onChange={this.updateCityState} />
+						<input type='text' name='city' defaultValue={this.props.address.city} onChange={this.updateCityState} />
 					</label>
 					<label> state:
-						<input type='text' name='email' defaultValue={this.props.address.state} onChange={this.updateStateState} />
+						<input type='text' name='state' defaultValue={this.props.address.state} onChange={this.updateStateState} />
 					</label>
 					<label> Zip:
-						<input type='text' name='email' defaultValue={this.props.address.zip} onChange={this.updateZipState} />
+						<input type='text' name='zip' defaultValue={this.props.address.zip} onChange={this.updateZipState} />
 					</label>
 				</form>
 				<button onClick={this.signUp3}>Save</button>

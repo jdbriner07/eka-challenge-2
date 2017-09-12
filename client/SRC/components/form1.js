@@ -59,7 +59,7 @@ class Form1 extends React.Component {
 						<input type='text' name='username' defaultValue={this.props.username.username} onChange={this.updateUsernameState} />
 					</label>
 					<label>Password:
-						<input type='text' name='password' defaultValue={this.props.password.password} onChange={this.updatePasswordState} />
+						<input type='password' name='password' defaultValue={this.props.password.password} onChange={this.updatePasswordState} />
 					</label>
 					<label> email:
 						<input type='text' name='email' defaultValue={this.props.email.email} onChange={this.updateEmailState} />
