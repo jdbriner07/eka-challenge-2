@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 import { updateFirstName, updateLastName } from '../actions/nameChange';
 import { updatePhone } from '../actions/phoneChange';
@@ -8,10 +9,14 @@ import { updatePhone } from '../actions/phoneChange';
 class Form2 extends React.Component {
 	constructor(props) {
 		super(props);
-
+		this.state = {
+			completed: false,
+			error: ''
+		}
 		this.updateFirstNameState = this.updateFirstNameState.bind(this);
 		this.updateLastNameState = this.updateLastNameState.bind(this);
 		this.updatePhoneState = this.updatePhoneState.bind(this);
+		this.signUp2 = this.signUp2.bind(this);
 	}
 
 	updateFirstNameState (e) {
@@ -26,10 +31,25 @@ class Form2 extends React.Component {
 		this.props.dispatch(updatePhone(e.target.value))
 	}
 
+	signUp2 () {
+		axios.post('/updateInfo2', {password: this.props.password.password, username: this.props.username.username, name: this.props.name, phoneNumber: this.props.telephoneNumber.telephoneNumber})
+		 .then( (e) => {
+		 	if (e.status === 201) {
+		 		this.setState({completed: true});
+		 	} else {
+		 		this.setState({error: 'Please contact support to resolve your issue'});
+		 	}
+		}).catch ( (e) => {
+			console.log(e);
+		})
+	}
+
 	render() {
+		console.log(this.props)
 		return (
-			<div>
+			!this.state.completed ? <div>
 				<form>
+					<h1 className='error'>{this.state.error}</h1>
 					<label> First Name: 
 						<input type='text' name='username' defaultValue={this.props.name.firstName} onChange={this.updateFirstNameState} />
 					</label>
@@ -40,12 +60,13 @@ class Form2 extends React.Component {
 						<input type='text' name='email' defaultValue={this.props.telephoneNumber.telephoneNumber} onChange={this.updatePhoneState} />
 					</label>
 				</form>
-				<button><Link to='/signUp3'>Save</Link></button>
+				<button onClick={this.signUp2}>Save</button>
 			</div>
+			: <Redirect to='/signUp3' />
 		)
 	}
 }
 
 export default connect((state) => {
-	return {name: state.name, telephoneNumber: state.telephoneNumber};
+	return {name: state.name, telephoneNumber: state.telephoneNumber, username: state.username, password: state.password};
 })(Form2)
