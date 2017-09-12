@@ -76,6 +76,7 @@ class Form3 extends React.Component {
 					</label>
 				</form>
 				<button onClick={this.signUp3}>Save</button>
+				<Link to='/signUp2'><button>BACK</button></Link>
 			</div>
 			: <Redirect to='/profile' />
 		)

@@ -1,0 +1,23 @@
+1) run 'npm install'
+
+2) run 'webpack'
+
+3) run 'node server/Database/createTable.js' to create the table in the database
+	--expectes a postgres database on the localhost
+	--process.env.pgDB is database name to connect to.
+	--process.env.pgUser and process.env.pgPW are the expected credentials for the database
+	--will run on process.env.pgPort or default to 5432
+
+4) run 'npm start' or 'node server/index.js' to start the server
+	--runs on process.env.PORT or defaults to 3000
+	--the database connection expects the same values as in step 3
+
+
+App flow
+	the user starts on the home page and has the option to log in or sign up.
+	sign up will bring the user to form1.
+	completing form1 and clicking save brings the user to form2, and the form3.
+	after completing form3, the user will be brought to a profile page where he can view all his information
+	clicking on the update profile button on the profile page will bring the user back to form2 where he can resubmit it and then form 3 with new values.
+
+	as long as a user has completed and saved form1 he can log in. loging in will bring him to his profile where it will populate all his information from the database. he can then resubmit form2 and form3 with the update profile button. 
