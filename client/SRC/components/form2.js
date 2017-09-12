@@ -32,16 +32,21 @@ class Form2 extends React.Component {
 	}
 
 	signUp2 () {
-		axios.post('/updateInfo2', {password: this.props.password.password, username: this.props.username.username, name: this.props.name, phoneNumber: this.props.telephoneNumber.telephoneNumber})
-		 .then( (e) => {
-		 	if (e.status === 201) {
-		 		this.setState({completed: true});
-		 	} else {
-		 		this.setState({error: 'Please contact support to resolve your issue'});
-		 	}
-		}).catch ( (e) => {
-			console.log(e);
-		})
+		let data = {password: this.props.password.password, username: this.props.username.username, name: this.props.name, phoneNumber: this.props.telephoneNumber.telephoneNumber};
+		if (checkValidInfo(data.name, data.phoneNumber) != null) {
+			axios.post('/updateInfo2', data)
+			 .then( (e) => {
+			 	if (e.status === 201) {
+			 		this.setState({completed: true});
+			 	} else {
+			 		this.setState({error: 'Please contact support to resolve your issue'});
+			 	}
+			}).catch ( (e) => {
+				console.log(e);
+			})
+		} else {
+			this.setState({error: 'please enter in your name and phone number just as 10 digits'})
+		}
 	}
 
 	render() {
@@ -70,3 +75,9 @@ class Form2 extends React.Component {
 export default connect((state) => {
 	return {name: state.name, telephoneNumber: state.telephoneNumber, username: state.username, password: state.password};
 })(Form2)
+
+function checkValidInfo(name, phoneNumber) {
+	var nameRegEx = /^[a-zA-Z]{3,16}$/;
+	var phoneRegEx = /^([0-9]{10,10})$/;
+	return name.firstName.match(nameRegEx) && name.lastName.match(nameRegEx) && phoneNumber.match(phoneRegEx);
+}

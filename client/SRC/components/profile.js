@@ -1,9 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { Link, Redirect } from 'react-router-dom';
+
+import { updateFirstName, updateLastName } from '../actions/nameChange';
+import { updatePhone } from '../actions/phoneChange';
+import { updateStreetNumber, updateCity, updateState, updateZip } from '../actions/addressChange';
+
 
 class Profile extends React.Component {
 	constructor(props) {
 		super(props);
+	}
+
+	componentDidMount() {
+		axios.get(`/login/${this.props.username.username}/${this.props.password.password}`)
+			.then( (e) => {
+				let data = e.data;
+				this.props.dispatch(updateFirstName(data.firstname));
+				this.props.dispatch(updateLastName(data.lastname));
+				this.props.dispatch(updatePhone(data.telephonenumber));
+				this.props.dispatch(updateStreetNumber(data.streetaddress));
+				this.props.dispatch(updateCity(data.city));
+				this.props.dispatch(updateState(data.state));
+				this.props.dispatch(updateZip(data.zip));
+			}).catch( (e) => {
+				console.log(e);
+			})
 	}
 	
 	render() {
@@ -21,11 +44,12 @@ class Profile extends React.Component {
 					</li>
 
 				</ul>
+				<button><Link to='/signUp2'>Update Information</Link></button>
 			</div>
 		)
 	}
 }
 
 export default connect((state) => {
-	return {address: state.address, username: state.username, email: state.email, name: state.name, telephoneNumber: state.telephoneNumber};
+	return {password: state.password, address: state.address, username: state.username, email: state.email, name: state.name, telephoneNumber: state.telephoneNumber};
 })(Profile)

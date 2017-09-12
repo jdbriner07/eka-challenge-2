@@ -33,17 +33,21 @@ class Form1 extends React.Component {
 	}
 
 	signUp () {
-		axios.post('/signup', {username:this.props.username.username, password: this.props.password.password, email: this.props.email.email})
-		.then( (e) => {
-			if (e.status === 201) {
-				console.log('redirected')
-				this.setState({completed: true});
-			} else {
-				this.setState({error: 'username already exists'});
-			}
-		}).catch( (e) => {
-			console.log(e);
-		})
+		let data = {username:this.props.username.username, password: this.props.password.password, email: this.props.email.email}
+		if (checkValidInfo(data.username, data.password, data.email) != null) {
+			axios.post('/signup', data)
+			.then( (e) => {
+				if (e.status === 201) {
+					this.setState({completed: true});
+				} else {
+					this.setState({error: 'username already exists'});
+				}
+			}).catch( (e) => {
+				console.log(e);
+			})
+		} else {
+			this.setState({error: 'Please enter valid Information'});
+		}
 	}
 
 	render() {
@@ -71,3 +75,11 @@ class Form1 extends React.Component {
 export default connect((state) => {
 	return {username: state.username, password: state.password, email: state.email};
 })(Form1)
+
+function checkValidInfo(username, password, email) {
+	var usernameRegEx = /^[a-zA-Z0-9_-]{3,16}$/;
+	var passwordRegEx = /^[a-zA-Z0-9_-]{6,18}$/;
+	var emailRegEx = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+	return username.match(usernameRegEx) && password.match(passwordRegEx) && email.match(emailRegEx);
+}
+

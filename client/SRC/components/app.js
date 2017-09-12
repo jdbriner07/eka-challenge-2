@@ -19,12 +19,12 @@ class App extends React.Component {
 				<div>
 					<h1>Jeff's EKA Challenge</h1>
 					<ul>
-						<li><Link to='/Home'>Home</Link></li>					
+						<li><Link to='/'>Home</Link></li>					
 						<li><Link to='/signUp'>Sign Up</Link></li>
 						<li><Link to='/logIn'>Log In</Link></li>
 					</ul>
 					
-					<Route path='/Home' />
+					<Route path='/' />
 					<Route path='/signUp' component={Form1}/>
 					<Route path='/logIn' component={LogIn}/>
 					<Route path='/signUp2' component={Form2}/>

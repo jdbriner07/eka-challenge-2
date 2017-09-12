@@ -37,17 +37,22 @@ class Form3 extends React.Component {
 	}
 
 	signUp3 () {
-		axios.post('/updateInfo3', {password: this.props.password.password, username: this.props.username.username, address: this.props.address})
-			.then( (e) => {
-				if (e.status === 201) {
-					this.setState({completed: true});
-				} else {
-					this.setState({error: 'please contact support to resolve your issue'});
-				}
-			})
-			.catch( (e) => {
-				console.log(e);
-			})
+		let data = {password: this.props.password.password, username: this.props.username.username, address: this.props.address};
+		if (checkValidInfo(data.address) != null) {
+			axios.post('/updateInfo3', data)
+				.then( (e) => {
+					if (e.status === 201) {
+						this.setState({completed: true});
+					} else {
+						this.setState({error: 'please contact support to resolve your issue'});
+					}
+				})
+				.catch( (e) => {
+					console.log(e);
+				})
+		} else {
+			this.setState({error: 'please enter valid information and a 5 digit zip code'})
+		}
 	}
 
 	render() {
@@ -57,7 +62,7 @@ class Form3 extends React.Component {
 				<form>
 					<h1 className='error'>{this.state.error}</h1>
 					<label> Street address: 
-						<input type='text' name='username' defaultValue={this.props.address.streeNumber} onChange={this.updateStreetNumberState} />
+						<input type='text' name='username' defaultValue={this.props.address.streetNumber} onChange={this.updateStreetNumberState} />
 					</label>
 					<label> City:
 						<input type='text' name='password' defaultValue={this.props.address.city} onChange={this.updateCityState} />
@@ -79,3 +84,12 @@ class Form3 extends React.Component {
 export default connect((state) => {
 	return {address: state.address, username: state.username, password: state.password};
 })(Form3)
+
+function checkValidInfo(address) {
+	var streetRegEx = /\w+(\s\w+){2,}/;
+	var placeRegEx = /^[a-zA-Z]{2,16}$/;
+	var zipRegEx = /^([0-9]{5,5})$/;
+	var cityRegEx = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
+	return address.streetNumber.match(streetRegEx) && address.city.match(cityRegEx) && address.state.match(placeRegEx) && address.zip.match(zipRegEx);
+}
+
