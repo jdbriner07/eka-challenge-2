@@ -1,8 +1,8 @@
 const name = function(state={}, action) {
-	if (action.type === 'changeFirstName') {
-		return Object.assign(state, {firstName: action.payload});
-	} else if (action.type === 'changeLastName') {
-		return Object.assign(state, {lastName: action.payload});
+	if (action.type === 'setFirstName') {
+		return Object.assign({}, state, {firstName: action.payload});
+	} else if (action.type === 'setLastName') {
+		return Object.assign({}, state, {lastName: action.payload});
 	}
 	return state;
 }
